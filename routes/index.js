@@ -16,9 +16,13 @@ const pool = new Pool({
 router.get('/', function(req, res, next) {
 
     pool.query('SELECT * FROM PRODUCT', (err, res) => {
-        console.log(err, res)
-        pool.end()
-    })
+        if (err) {
+            throw err
+        }
+    });
+    res.json({
+        name: res
+    });
     res.render('index', { title: 'Express' });
 });
 
